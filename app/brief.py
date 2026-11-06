@@ -72,10 +72,14 @@ def get_calendar(s, day):
     url = s.get("ical_url")
     if not url:
         return {"error": "no calendar connected"}
+    if url.startswith("webcal://"):
+        url = "https://" + url[len("webcal://"):]
     try:
         import icalendar
         import recurring_ical_events
         r = requests.get(url, timeout=15)
+        if r.status_code in (401, 403, 404):
+            return {"error": f"Google refused the calendar link ({r.status_code}). Use the Secret address in iCal format, and make sure you copied all of it."}
         r.raise_for_status()
         cal = icalendar.Calendar.from_ical(r.content)
         events = []
@@ -98,6 +102,10 @@ def get_calendar(s, day):
         for e in events:
             e.pop("_sort")
         return {"events": events[:15]}
+    except requests.HTTPError as e:
+        return {"error": f"calendar unavailable (HTTP {e.response.status_code if e.response is not None else '?'})"}
+    except ValueError:
+        return {"error": "That link didn't return a calendar file. Use the Secret address in iCal format (it ends in .ics)."}
     except Exception as e:
         return {"error": f"calendar unavailable ({type(e).__name__})"}
 

@@ -2,13 +2,13 @@ manifestVersion: 1
 id: paragdise-intranet-hq
 category: files
 name: Intranet HQ
-version: "1.0.1"
+version: "1.0.2"
 tagline: A private homepage for your business
 description: >-
   A private intranet homepage for a small business or ministry. App pipeline board,
   common resource links, and a daily brief (calendar, weather, pipeline nudges)
   written once each morning by Claude, with a hard monthly cap on API calls.
-releaseNotes: "Fixes a startup error where the app could not write to its data folder."
+releaseNotes: "Clearer calendar errors, and webcal links now work."
 developer: Paragdise Ventures LLC
 website: https://paragdise.com
 dependencies: []
