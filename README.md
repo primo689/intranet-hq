@@ -17,7 +17,7 @@ A private, self-hosted intranet homepage, packaged as an Umbrel community app. B
 
 1. Create a public GitHub repo (for example `intranet-hq`) and push this folder to it.
 2. (Already done for Primo689. If someone forks this, they replace the username in `paragdise-intranet-hq/docker-compose.yml` and `paragdise-intranet-hq/umbrel-app.yml`, using lowercase in the image name.)
-3. Build the image: push a tag (`git tag v1.0.0 && git push --tags`). The GitHub Action builds for both x86 and ARM and publishes to `ghcr.io/primo689/intranet-hq`.
+3. Build the image: any push to `main` that touches the app or the manifest kicks off the GitHub Action. It reads the version from `umbrel-app.yml`, builds for both x86 and ARM and publishes to `ghcr.io/primo689/intranet-hq`.
 4. On GitHub, open the package's settings and set visibility to **Public** so Umbrel can pull it.
 5. In Umbrel: App Store, the three dots, Community App Stores, paste your repo URL, then install **Intranet HQ**. It opens on port 8484 behind your Umbrel login.
 6. The first time you open it, a short setup walks you through your name, your town (looked up for you), your apps, and the optional Claude key and Google Calendar link. You can rerun it anytime from Settings.
@@ -28,7 +28,7 @@ Update the BookStack link in Resources to match the port Umbrel gave it.
 
 ## Updating
 
-Bump `version` in `umbrel-app.yml`, bump the image tag in `docker-compose.yml`, push a matching git tag. Umbrel shows the update.
+Bump `version` in `umbrel-app.yml` and the image tag in `docker-compose.yml` to match, then push to `main`. The Action builds that version and Umbrel shows the update.
 
 ## Data
 

@@ -2,7 +2,11 @@ name: Build Intranet HQ image
 
 on:
   push:
-    tags: ["v*"]
+    branches: [main]
+    paths:
+      - "app/**"
+      - "paragdise-intranet-hq/umbrel-app.yml"
+      - ".github/workflows/build.yml"
   workflow_dispatch:
 
 permissions:
@@ -23,7 +27,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - id: v
         run: |
-          echo "tag=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+          # version comes from the Umbrel manifest, so bumping it there ships a new image
+          echo "tag=$(sed -n 's/^version: *\"\{0,1\}\([^\"]*\)\"\{0,1\}$/\1/p' paragdise-intranet-hq/umbrel-app.yml)" >> "$GITHUB_OUTPUT"
           # container registry names must be lowercase (Primo689 -> primo689)
           echo "owner=${GITHUB_REPOSITORY_OWNER,,}" >> "$GITHUB_OUTPUT"
       - uses: docker/build-push-action@v6
