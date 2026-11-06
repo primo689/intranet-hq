@@ -1,0 +1,6 @@
+flask==3.1.*
+gunicorn==23.*
+requests==2.32.*
+anthropic>=0.60
+icalendar==6.*
+recurring-ical-events==3.*

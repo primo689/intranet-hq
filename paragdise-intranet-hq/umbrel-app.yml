@@ -1,0 +1,24 @@
+manifestVersion: 1
+id: paragdise-intranet-hq
+category: files
+name: Intranet HQ
+version: "1.0.0"
+tagline: A private homepage for your business
+description: >-
+  A private intranet homepage for a small business or ministry. App pipeline board,
+  common resource links, and a daily brief (calendar, weather, pipeline nudges)
+  written once each morning by Claude, with a hard monthly cap on API calls.
+releaseNotes: "First release."
+developer: Paragdise Ventures LLC
+website: https://paragdise.com
+dependencies: []
+repo: https://github.com/Primo689/intranet-hq
+support: https://paragdise.com
+icon: https://raw.githubusercontent.com/Primo689/intranet-hq/main/paragdise-intranet-hq/icon.png
+port: 8484
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+submitter: Paragdise Ventures LLC
+submission: https://paragdise.com

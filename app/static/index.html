@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Intranet HQ</title>
+<link rel="icon" href="/static/icon.png" type="image/png" id="favicon">
+<link rel="apple-touch-icon" href="/static/icon-180.png">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <svg class="waves" viewBox="0 0 600 220" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:color-mix(in srgb, var(--paradise-gold) 55%, white)"/><stop offset=".5" style="stop-color:var(--paradise-gold)"/><stop offset="1" style="stop-color:color-mix(in srgb, var(--paradise-gold) 80%, black)"/></linearGradient>
+      <linearGradient id="sea" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--tropical-teal)"/><stop offset="1" style="stop-color:var(--island-night)"/></linearGradient>
+      <linearGradient id="sea2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--lagoon)"/><stop offset="1" style="stop-color:var(--ocean-deep)"/></linearGradient>
+    </defs>
+    <circle cx="500" cy="190" r="150" fill="url(#gold)" opacity=".16"/>
+    <path d="M410 190a90 90 0 0 1 180 0h-34a56 56 0 0 0-112 0z" fill="url(#gold)"/>
+    <path d="M120 220C260 150 430 132 600 138v82z" fill="url(#sea2)"/>
+    <path d="M230 220C350 168 480 160 600 164v56z" fill="url(#sea)"/>
+  </svg>
+  <div class="wrap top-inner">
+    <div class="brand">
+      <img src="/brand/logo" alt="" width="36" height="36" class="mark" id="brand-mark">
+      <div>
+        <div class="wordmark" id="wordmark">PARA<span class="g">G</span>DISE</div>
+        <div class="sub-rule"><i></i><span id="brand-label">HQ</span><i></i></div>
+      </div>
+    </div>
+    <button class="icon-btn" id="open-settings" aria-label="Settings" title="Settings">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+    </button>
+  </div>
+  <div class="wrap hero">
+    <p class="date" id="today-label">&nbsp;</p>
+    <h1 id="greeting">Good morning.</h1>
+    <p class="tagline" id="brand-tagline">Build something better.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="grid-top">
+    <article class="card brief" aria-labelledby="brief-h">
+      <div class="card-head">
+        <h2 id="brief-h">Daily brief</h2>
+        <span class="pill" id="brief-source"></span>
+      </div>
+      <div id="brief-body" class="brief-body"><p class="muted">Loading...</p></div>
+      <div class="card-foot">
+        <span class="muted small" id="brief-meta"></span>
+        <button class="btn ghost small" id="regen">Refresh brief</button>
+      </div>
+    </article>
+
+    <article class="card today" aria-labelledby="today-h">
+      <h2 id="today-h">Today</h2>
+      <div id="weather" class="weather"></div>
+      <ul id="events" class="events"></ul>
+    </article>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>App pipeline</h2>
+      <div class="head-actions">
+        <button class="btn ghost small" id="import-apps">Paste a list</button>
+        <button class="btn small" id="add-app">Add app</button>
+      </div>
+    </div>
+    <div class="board" id="board"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Resources</h2>
+      <button class="btn ghost small" id="edit-links">Edit links</button>
+    </div>
+    <div id="links" class="links"></div>
+  </section>
+
+  <footer class="foot muted small">
+    <span>Paragdise Ventures LLC</span>
+    <span id="usage"></span>
+  </footer>
+</main>
+
+<!-- app editor -->
+<dialog id="app-dialog">
+  <form method="dialog" id="app-form" class="dlg">
+    <h3 id="app-dialog-title">Edit app</h3>
+    <label>Name <input name="name" required maxlength="80"></label>
+    <label>One-liner <input name="tagline" maxlength="140"></label>
+    <label>Stage <select name="stage" id="stage-select"></select></label>
+    <label>Next step <input name="next_step" maxlength="200" placeholder="What moves this forward?"></label>
+    <label>Notes <textarea name="notes" rows="3" maxlength="500"></textarea></label>
+    <div class="dlg-actions">
+      <button type="button" class="btn danger ghost" id="delete-app">Delete</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn ghost" data-close>Cancel</button>
+      <button type="submit" class="btn">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- links editor -->
+<dialog id="links-dialog">
+  <form method="dialog" id="links-form" class="dlg wide">
+    <h3>Edit links</h3>
+    <p class="muted small">Group, label, address. Clear a row's label to remove it.</p>
+    <div id="links-rows" class="link-rows"></div>
+    <button type="button" class="btn ghost small" id="add-link-row">Add a link</button>
+    <div class="dlg-actions">
+      <span class="spacer"></span>
+      <button type="button" class="btn ghost" data-close>Cancel</button>
+      <button type="submit" class="btn">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- bulk import -->
+<dialog id="import-dialog">
+  <form method="dialog" id="import-form" class="dlg wide">
+    <h3>Paste a list of apps</h3>
+    <p class="muted small">One app per line: Name | one-liner | stage | next step. Only the name is required. Stages: Idea, Building, Testing, Submitted, Live.</p>
+    <textarea name="text" rows="10" placeholder="My App | What it does | Building | Finish onboarding screen"></textarea>
+    <div class="dlg-actions">
+      <span class="spacer"></span>
+      <button type="button" class="btn ghost" data-close>Cancel</button>
+      <button type="submit" class="btn">Add to board</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- first-run setup -->
+<dialog id="onboard" class="onboard">
+  <form id="ob-form" class="dlg wide" novalidate>
+    <div class="ob-top">
+      <img src="/brand/logo" alt="" width="40" class="mark-lg" id="ob-mark">
+      <div class="ob-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <section class="ob-step" data-step="0">
+      <h3>Welcome to Intranet HQ.</h3>
+      <p class="muted">A home base for the business: your apps, your links, and a short brief each morning. Setup takes about two minutes, and you can skip anything and come back later in Settings.</p>
+      <div class="row2">
+        <label>Your first name <input name="owner_name" maxlength="40" autocomplete="given-name"></label>
+        <label>Company <input name="company_name" maxlength="80"></label>
+      </div>
+    </section>
+
+    <section class="ob-step" data-step="1" hidden>
+      <h3>Where are you?</h3>
+      <p class="muted">Used only for the weather in your brief. Your town is enough.</p>
+      <div class="ob-search">
+        <input name="town_q" placeholder="Town, state (like Springfield, MO)" autocomplete="off">
+        <button type="button" class="btn ghost" id="ob-find">Find</button>
+      </div>
+      <div id="ob-towns" class="ob-towns"></div>
+      <p class="muted small" id="ob-town-picked"></p>
+    </section>
+
+    <section class="ob-step" data-step="2" hidden>
+      <h3>What are you building?</h3>
+      <p class="muted">Paste your apps, one per line. Just names is fine. Add more detail with bars: Name | one-liner | stage | next step.</p>
+      <textarea name="apps" rows="8" placeholder="Recipe Box | Save family recipes | Building | Finish the share screen&#10;Habit Tracker&#10;Trail Finder"></textarea>
+      <p class="muted small" id="ob-apps-note"></p>
+    </section>
+
+    <section class="ob-step" data-step="3" hidden>
+      <h3>Connect the brief</h3>
+      <p class="muted">Both optional. Without a key you still get a plain brief every morning. With one, Claude writes it, capped at a set number of calls a month.</p>
+      <label>Claude API key <input name="anthropic_api_key" type="password" autocomplete="off" placeholder="sk-ant-..."></label>
+      <label>Google Calendar secret iCal address
+        <input name="ical_url" type="password" autocomplete="off" placeholder="https://calendar.google.com/calendar/ical/.../basic.ics">
+      </label>
+      <p class="muted small">Find it in Google Calendar settings: your calendar, Integrate calendar, Secret address in iCal format. Treat it like a password.</p>
+      <label>Brief time <input name="brief_time" type="time" value="06:00"></label>
+    </section>
+
+    <section class="ob-step" data-step="4" hidden>
+      <h3>You're set.</h3>
+      <p class="muted" id="ob-summary"></p>
+      <p class="muted small">Tip: on your phone, use Share, then Add to Home Screen, and Intranet HQ opens like an app.</p>
+    </section>
+
+    <div class="dlg-actions">
+      <button type="button" class="btn ghost" id="ob-back">Back</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn ghost" id="ob-skip">Skip</button>
+      <button type="submit" class="btn" id="ob-next">Next</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- settings -->
+<dialog id="settings-dialog">
+  <form method="dialog" id="settings-form" class="dlg wide">
+    <h3>Settings</h3>
+    <fieldset>
+      <legend>You</legend>
+      <div class="row2">
+        <label>Your first name <input name="owner_name" maxlength="40" placeholder="Shown in the greeting"></label>
+        <label>Company <input name="company_name" maxlength="80"></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Look</legend>
+      <div class="row2">
+        <label>Wordmark <input name="brand_name" maxlength="24"></label>
+        <label>Highlight letter <input name="brand_highlight" maxlength="3" placeholder="Optional"></label>
+      </div>
+      <div class="row2">
+        <label>Label under it <input name="brand_label" maxlength="16"></label>
+        <label>Tagline <input name="brand_tagline" maxlength="60"></label>
+      </div>
+      <div class="row3 colors">
+        <label>Main <input name="color_primary" type="color"></label>
+        <label>Highlight <input name="color_highlight" type="color"></label>
+        <label>Text <input name="color_ink" type="color"></label>
+      </div>
+      <div class="logo-row">
+        <img id="logo-preview" src="/brand/logo" alt="Current logo" width="44">
+        <label class="btn ghost small file-btn">Upload logo<input type="file" id="logo-file" accept="image/png,image/jpeg,image/webp" hidden></label>
+        <button type="button" class="btn ghost small" id="logo-remove">Use default</button>
+      </div>
+      <p class="muted small">PNG, JPG, or WebP under 1 MB. A square image with a transparent background looks best.</p>
+      <button type="button" class="btn ghost small" id="reset-brand">Reset look to default</button>
+    </fieldset>
+    <fieldset>
+      <legend>Claude</legend>
+      <label>API key <input name="anthropic_api_key" type="password" autocomplete="off" placeholder="sk-ant-..."></label>
+      <p class="muted small" id="key-status"></p>
+      <div class="row2">
+        <label>Model <input name="model"></label>
+        <label>Monthly call cap <input name="monthly_call_cap" type="number" min="0" max="200"></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Brief</legend>
+      <label>Google Calendar secret iCal address
+        <input name="ical_url" type="password" autocomplete="off" placeholder="https://calendar.google.com/calendar/ical/.../basic.ics">
+      </label>
+      <p class="muted small" id="ical-status"></p>
+      <div class="row2">
+        <label>Brief time <input name="brief_time" type="time"></label>
+        <label>Nudge after (days) <input name="stall_days" type="number" min="1" max="365"></label>
+      </div>
+      <div class="row3">
+        <label>Place <input name="location_name"></label>
+        <label>Lat <input name="latitude" type="number" step="0.0001"></label>
+        <label>Lon <input name="longitude" type="number" step="0.0001"></label>
+      </div>
+    </fieldset>
+    <div class="dlg-actions">
+      <button type="button" class="btn ghost small" id="clear-key">Remove key</button>
+      <button type="button" class="btn ghost small" id="rerun-setup">Run setup again</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn ghost" data-close>Cancel</button>
+      <button type="submit" class="btn">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
