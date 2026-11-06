@@ -5,7 +5,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt \
  && useradd -u 1000 -m hq && mkdir -p /data && chown 1000:1000 /data
 COPY . .
-USER 1000
 EXPOSE 8080
 # one worker on purpose: the daily-brief scheduler lives in this process
+ENTRYPOINT ["python", "/app/entrypoint.py"]
 CMD ["gunicorn", "-w", "1", "--threads", "4", "-b", "0.0.0.0:8080", "--timeout", "90", "server:app"]
